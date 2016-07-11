@@ -15,4 +15,4 @@ def index():
                            powered_by=environ.get('POWERED_BY', 'Deis'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0', port=80)
