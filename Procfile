@@ -1,1 +1,1 @@
-clock: python clock.py
+clock: /env/bin/python /app/clock.py
