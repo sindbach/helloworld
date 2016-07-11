@@ -4,7 +4,7 @@ from os import environ
 
 from flask import Flask
 from flask import render_template
-from apscheduler.scheduler import Scheduler
+from apscheduler.schedulers import Scheduler
 
 app = Flask(__name__)
 
