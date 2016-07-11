@@ -14,7 +14,7 @@ sched = BlockingScheduler()
 def index():
     return render_template('index.html')
 
-@sched.scheduled_job('cron', id='scheduled', minutes=3)
+@sched.scheduled_job('cron', id='scheduled', minute=3)
 def scheduled_worker():
     print "Interval schedule being called"
 
