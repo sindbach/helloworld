@@ -24,5 +24,5 @@ if __name__ == '__main__':
     app.logger.setLevel(logging.INFO)
     sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=60, timezone=pytz.utc)
     sched.start()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=80)
 
