@@ -1,25 +1,28 @@
 #!/usr/bin/env python 
 import pytz
-from os import environ
+import logging
 
 from flask import Flask
 from flask import render_template
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 
-sched = BlockingScheduler()
+sched = BackgroundScheduler(daemon=True)
 
 @app.route('/')
 def index():
+    app.logger.info("index is requested")
     return render_template('index.html')
 
-@sched.scheduled_job('cron', id='scheduled', minute=3, timezone=pytz.utc)
 def scheduled_worker():
-    print "Interval schedule being called"
-
-sched.start()
+    app.logger.info("scheduled worker")
+    index()
 
 if __name__ == '__main__':
+    app.logger.addHandler(logging.StreamHandler())
+    app.logger.setLevel(logging.INFO)
+    sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=60, timezone=pytz.utc)
+    sched.start()
+    app.run(host='0.0.0.0', port=5000)
 
-    app.run(host='0.0.0.0', port=80)
