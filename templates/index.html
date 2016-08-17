@@ -3,6 +3,11 @@
     <head>
     </head>
     <body>
-        <h2>Hello Flask + Deis</h2>
+          Hello World
+          <ul>
+            {% for doc in documents %}
+            <li> {{doc}}</li>
+            {% endfor %}
+          </ul>
     </body>
 </html>

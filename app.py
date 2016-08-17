@@ -1,28 +1,38 @@
 #!/usr/bin/env python 
 import pytz
 import logging
+import os 
 
 from flask import Flask
 from flask import render_template
 from apscheduler.schedulers.background import BackgroundScheduler
+from pymongo import MongoClient, DESCENDING
 
 app = Flask(__name__)
+
+DB_CONN = MongoClient(os.environ.get('DATABASE_URL'))
+try:
+    COLLECTION = DB_CONN.support_gg.test
+except Exception, ex: 
+    raise Exception("Failed to fetch collection : %s" % ex)
 
 sched = BackgroundScheduler(daemon=True)
 
 @app.route('/')
 def index():
     app.logger.info("index is requested")
-    return render_template('index.html')
+    documents = COLLECTION.find({}, sort=[('_id', DESCENDING)]).limit(2)
+    return render_template('index.html', documents=documents)
 
 def scheduled_worker():
     app.logger.info("scheduled worker")
     index()
+    return
 
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
-    sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=60, timezone=pytz.utc)
-    sched.start()
+    #sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=60, timezone=pytz.utc)
+    #sched.start()
     app.run(host='0.0.0.0', port=80)
 
