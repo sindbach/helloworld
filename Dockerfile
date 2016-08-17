@@ -6,6 +6,7 @@ RUN apk add --update \
     python \
     python-dev \
     py-pip \
+    openssl-dev \
   && pip install virtualenv \
   && rm -rf /var/cache/apk/*
 
