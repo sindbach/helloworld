@@ -2,7 +2,7 @@
 import pytz
 import logging
 import os 
-
+import ssl 
 from flask import Flask
 from flask import render_template
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -10,7 +10,7 @@ from pymongo import MongoClient, DESCENDING
 
 app = Flask(__name__)
 
-DB_CONN = MongoClient(os.environ.get('DATABASE_URL'))
+DB_CONN = MongoClient(os.environ.get('DATABASE_URL'), ssl=True, ssl_cert_reqs=ssl.CERT_NONE)
 try:
     COLLECTION = DB_CONN.support_gg.test
 except Exception, ex: 
