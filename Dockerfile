@@ -16,4 +16,4 @@ COPY . /app
 RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
 
 EXPOSE 80
-ENTRYPOINT ["/env/bin/python", "/app/app.py"]
+# ENTRYPOINT ["/env/bin/python", "/app/app.py"]
