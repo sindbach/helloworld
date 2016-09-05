@@ -1,6 +1,7 @@
 #!/usr/bin/env python 
 import pytz
 import logging
+logging.basicConfig()
 import os 
 import ssl 
 from flask import Flask
