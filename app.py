@@ -5,7 +5,7 @@ import os
 import ssl 
 from flask import Flask
 from flask import render_template
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BlockingScheduler
 from pymongo import MongoClient, DESCENDING
 
 app = Flask(__name__)
