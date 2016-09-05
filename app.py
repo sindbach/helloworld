@@ -16,7 +16,7 @@ try:
 except Exception, ex: 
     raise Exception("Failed to fetch collection : %s" % ex)
 
-sched = BackgroundScheduler(daemon=True)
+sched = BlockingScheduler(daemon=True)
 
 @app.route('/')
 def index():
@@ -32,7 +32,7 @@ def scheduled_worker():
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
-    #sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=60, timezone=pytz.utc)
-    #sched.start()
+    sched.add_job(scheduled_worker, 'interval', id='scheduled_worker', minutes=3, timezone=pytz.utc)
+    sched.start()
     app.run(host='0.0.0.0', port=80)
 
