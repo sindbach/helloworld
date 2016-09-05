@@ -23,5 +23,5 @@ def index():
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000)
 
