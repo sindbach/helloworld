@@ -3,8 +3,8 @@ import pytz
 import logging
 import requests
 logging.basicConfig()
-from apscheduler.schedulers.blocking import BlockingScheduler
-sched = BlockingScheduler(daemon=True)
+from apscheduler.schedulers.background import BackgroundScheduler
+sched = BackgroundScheduler(daemon=True)
 
 
 if __name__ == "__main__":
