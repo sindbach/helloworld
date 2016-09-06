@@ -11,21 +11,18 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     app.logger.info("manual request")
-    return
 
 @app.route('/worka')
 def scheduled_workerB():
     app.logger.info("scheduled worker B")
     time.sleep(10)
     app.logger.info("completed B")
-    return
 
 @app.route('/workb')
 def scheduled_workerA():
     app.logger.info("scheduled worker A")
     time.sleep(10)
     app.logger.info("completed A")
-    return
 
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler())
