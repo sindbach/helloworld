@@ -9,7 +9,7 @@ sched = BlockingScheduler(daemon=True)
 HOME_URL = "http://nonfat-zoologer.mongodb.cc/"
 
 def trigger_worker(path):
-    grequests.map((grequests.get(HOME_URL+path)))
+    grequests.map([grequests.get(HOME_URL+path)])
     return 
 
 if __name__ == "__main__":
