@@ -3,7 +3,7 @@ import pytz
 import logging
 logging.basicConfig()
 from apscheduler.schedulers.blocking import BlockingScheduler
-from flask import redirect,
+from flask import redirect
 sched = BlockingScheduler(daemon=True)
 
 
