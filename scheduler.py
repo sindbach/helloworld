@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 import pytz
 import logging
-import requests
 logging.basicConfig()
-from apscheduler.schedulers.background import BackgroundScheduler
-sched = BackgroundScheduler(daemon=True)
+import grequests
+from apscheduler.schedulers.blocking import BlockingScheduler
+sched = BlockingScheduler(daemon=True)
 
+HOME_URL = "http://nonfat-zoologer.mongodb.cc/"
+
+def trigger_worker(path):
+    grequests.map((grequests.get(HOME_URL+path)))
+    return 
 
 if __name__ == "__main__":
-    sched.add_job(func=requests.get("http://nonfat-zoologer.mongodb.cc/worka"), trigger='interval', id='scheduled_workerA', max_instances=1, minutes=3, timezone=pytz.utc)
-    sched.add_job(func=requests.get("http://nonfat-zoologer.mongodb.cc/workb"), trigger='interval', id='scheduled_workerB', max_instances=1, minutes=5, timezone=pytz.utc)
+    sched.add_job(func=trigger_worker("worka"), trigger='interval', id='scheduled_workerA', max_instances=1, minutes=3, timezone=pytz.utc)
+    sched.add_job(func=trigger_worker("workb"), trigger='interval', id='scheduled_workerB', max_instances=1, minutes=5, timezone=pytz.utc)
     sched.start()

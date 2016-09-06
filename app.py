@@ -13,14 +13,14 @@ def index():
     app.logger.info("manual request")
     return "1"
 
-@app.route('/worka')
+@app.route('/workb')
 def scheduled_workerB():
     app.logger.info("scheduled worker B")
     time.sleep(10)
     app.logger.info("completed B")
     return "2"
 
-@app.route('/workb')
+@app.route('/worka')
 def scheduled_workerA():
     app.logger.info("scheduled worker A")
     time.sleep(10)
