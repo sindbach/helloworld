@@ -3,6 +3,7 @@ FROM alpine:3.4
 # install curl
 RUN apk add --update \
     bash \
+    build-base \
     python \
     python-dev \
     py-pip \
