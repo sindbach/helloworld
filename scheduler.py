@@ -6,16 +6,22 @@ import grequests
 from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler(daemon=True)
 
+logger = logging.getLogger(__name__)
+
 HOME_URL = "http://nonfat-zoologer.mongodb.cc/"
 
 def trigger_workerA():
+    logger.info("Triggered A")
     path = "worka"
     grequests.map([grequests.get(HOME_URL+path)])
+    logger.info("triggered A")
     return 
 
 def trigger_workerB():
+    logger.info("Triggered B")
     path = "workb"
     grequests.map([grequests.get(HOME_URL+path)])
+    logger.info("Completed A")
     return 
 
 if __name__ == "__main__":
