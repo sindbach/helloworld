@@ -1,2 +1,2 @@
-cmd: /env/bin/python /app/app.py
-scheduler: /env/bin/python /app/scheduler.py 
+web: /env/bin/python /app/app.py
+clock: /env/bin/python /app/scheduler.py 
