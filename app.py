@@ -15,7 +15,7 @@ def index():
 
 @app.route('/workb')
 def scheduled_workerB():
-    app.logger.info("scheduled worker B")
+    app.logger.info("Scheduled worker B")
     time.sleep(10)
     app.logger.info("completed B")
     return "2"
