@@ -10,7 +10,7 @@ sched = BlockingScheduler()
 
 logger = logging.getLogger(__name__)
 
-HOME_URL = "http://localhost:5000/"
+HOME_URL = "http://nonfat-zoologer.mongodb.cc/"
 
 def log_me(response, *args, **kwargs):
     logger.info(response)
