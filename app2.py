@@ -7,7 +7,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     app.logger.info("manual request")
@@ -28,5 +27,5 @@ def scheduled_workerA():
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=80)
 
