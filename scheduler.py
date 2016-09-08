@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import pytz
 import time
 import logging
 logging.basicConfig()
@@ -32,6 +33,6 @@ if __name__ == "__main__":
     logger.addHandler(logging.StreamHandler())
     logger.setLevel(logging.INFO)
     logger.info("Scheduler starts")
-    sched.add_job(func=trigger_workerA, trigger='interval', id='scheduled_workerA', max_instances=1, minutes=1)
-    sched.add_job(func=trigger_workerB, trigger='interval', id='scheduled_workerB', max_instances=1, minutes=2)
+    sched.add_job(func=trigger_workerA, trigger='interval', id='scheduled_workerA', max_instances=1, minutes=1, timezone=pytz.utc)
+    sched.add_job(func=trigger_workerB, trigger='interval', id='scheduled_workerB', max_instances=1, minutes=3, timezone=pytz.utc)
     sched.start()
