@@ -17,14 +17,14 @@ def index():
 @app.route('/worka')
 def scheduled_workerA():
     app.logger.info("scheduled worker A")
-    time.sleep(10)
+    time.sleep(30)
     app.logger.info("completed A")
     return "2"
 
 @app.route('/workb')
 def scheduled_workerB():
     app.logger.info("scheduled worker B")
-    time.sleep(10)
+    time.sleep(60)
     app.logger.info("completed B")
     return "3"
 
