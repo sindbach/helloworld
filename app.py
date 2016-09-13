@@ -1,34 +1,24 @@
 #!/usr/bin/env python 
 import logging
 logging.basicConfig()
-import os 
-import time 
+import os  
 from flask import Flask
+import pymongo
+import ssl 
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
-    app.logger.info("manual request")
-    return "1"
-
-@app.route('/workb')
-def scheduled_workerB():
-    app.logger.info("Scheduled worker B")
-    time.sleep(10)
-    app.logger.info("completed B")
-    return "2"
-
-@app.route('/worka')
-def scheduled_workerA():
-    app.logger.info("scheduled worker A")
-    time.sleep(10)
-    app.logger.info("completed A")
-    return "3"
+    app_db = mongo_client[os.environ.get('DATABASE_NAME')]
+    cursor = app_db[os.environ.get('DATABASE_COLL')].find({}, sort=[("start", pymongo.DESCENDING)]).limit(5)
+    for c in cursor: 
+        app.logger.info(c)
+    return 
 
 if __name__ == '__main__':
+    mongo_client = pymongo.MongoClient(os.environ.get(DATABASE_URL), ssl_cert_reqs=ssl.CERT_NONE)
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80, threaded=True)
 
