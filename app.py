@@ -17,7 +17,7 @@ def index():
     return 
 
 if __name__ == '__main__':
-    mongo_client = pymongo.MongoClient(os.environ.get(DATABASE_URL), ssl_cert_reqs=ssl.CERT_NONE)
+    mongo_client = pymongo.MongoClient(os.environ.get('DATABASE_URL'), ssl_cert_reqs=ssl.CERT_NONE)
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
     app.run(host='0.0.0.0', port=80, threaded=True)
